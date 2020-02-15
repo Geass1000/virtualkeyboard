@@ -1,6 +1,8 @@
 import * as Enums from './enums';
 import * as Interfaces from './interfaces';
 
+export const PixInPoint = 30;
+
 export const KeyboardLayout: Interfaces.KeyboardLayoutElement[] = [
   {
     key: Enums.KeyCode.Escape,
