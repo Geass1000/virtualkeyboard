@@ -11,21 +11,62 @@ import * as Interfaces from '../shared/interfaces';
   styleUrls: ['./keyboard.component.scss']
 })
 export class KeyboardComponent implements OnInit {
-  @Input('pressedKeys')
-  set inPressedKeys (value: string[]) {
-    if (_.isNil(value)) {
-      this.pressedKeys = [];
-    }
-
-    this.pressedKeys = value;
-  }
-  private pressedKeys: string[];
+  private pressedKeysMap: Map<string, boolean>;
+  public pressedKeysList: string[];
 
   public keyboardLayout = Constants.KeyboardLayout;
 
-  constructor () { }
-
   ngOnInit (): void {
+    this.pressedKeysMap = new Map();
+    this.updateListOfPressedKeys();
+  }
+
+  /**
+   * Handles window Key Up event.
+   *
+   * @param   {KeyboardEvent} event
+   * @returns {void}
+   */
+  onKeyUp (
+    event: KeyboardEvent,
+  ): void {
+    console.log(`KeyUP`, event);
+    this.pressedKeysMap.set(event.code, false);
+    event.preventDefault();
+    this.updateListOfPressedKeys();
+  }
+
+  /**
+   * Handles window Key Down event.
+   *
+   * @param   {KeyboardEvent} event
+   * @returns {void}
+   */
+  onKeyDown (
+    event: KeyboardEvent,
+  ): void {
+    console.log(`KeyDOWN`, event);
+    this.pressedKeysMap.set(event.code, true);
+    event.preventDefault();
+    this.updateListOfPressedKeys();
+  }
+
+  /**
+   * Updates list of pressed keys.
+   *
+   * @returns {void}
+   */
+  updateListOfPressedKeys (
+  ): void {
+    const pressedKeys = [];
+
+    this.pressedKeysMap.forEach((value, key) => {
+      if (value === true) {
+        pressedKeys.push(key);
+      }
+    });
+
+    this.pressedKeysList = pressedKeys;
   }
 
   /**
@@ -38,7 +79,7 @@ export class KeyboardComponent implements OnInit {
     keyboardLayoutElement: Interfaces.KeyboardLayoutElement,
   ): boolean {
     const elementIsInListOfPressedKeys = _.includes(
-      this.pressedKeys,
+      this.pressedKeysList,
       keyboardLayoutElement.key,
     );
     return elementIsInListOfPressedKeys;
