@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 
 // Feature Modules
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 const modules = [
   CoreModule,
+  SharedModule,
 ];
 
 // Components
@@ -17,13 +19,6 @@ const components = [
   KeyboardComponent,
 ];
 
-// Directives
-import { KeyEventDirective } from './shared/key-event-directive';
-
-const directives = [
-  KeyEventDirective,
-];
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -31,7 +26,6 @@ const directives = [
   ],
   declarations: [
     ...components,
-    ...directives
   ],
   providers: [],
   bootstrap: [

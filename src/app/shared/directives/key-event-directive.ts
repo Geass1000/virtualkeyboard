@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { distinctUntilKeyChanged } from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import { BaseComponent } from './base.component';
+import { BaseComponent } from '../base.component';
 
 @Directive({
   selector: '[appKeyEvent]'
