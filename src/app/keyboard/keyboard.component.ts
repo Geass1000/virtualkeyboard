@@ -22,6 +22,26 @@ export class KeyboardComponent implements OnInit {
   }
 
   /**
+   * Handles clicks of `Click Delegate` events for key buttons.
+   *
+   * @param   {Interfaces.ClickDelegateEvent} data
+   * @returns {void}
+   */
+  onClickKeyboardLayoutElement (
+    data: Interfaces.ClickDelegateEvent,
+  ): void {
+    const prevStateOfKey = this.pressedKeysMap.get(data.id);
+
+    if (_.isNil(prevStateOfKey) || prevStateOfKey === false) {
+      this.pressedKeysMap.set(data.id, true);
+    } else {
+      this.pressedKeysMap.set(data.id, false);
+    }
+
+    this.updateListOfPressedKeys();
+  }
+
+  /**
    * Handles window Key Up event.
    *
    * @param   {KeyboardEvent} event
@@ -30,7 +50,6 @@ export class KeyboardComponent implements OnInit {
   onKeyUp (
     event: KeyboardEvent,
   ): void {
-    console.log(`KeyUP`, event);
     this.pressedKeysMap.set(event.code, false);
     event.preventDefault();
     this.updateListOfPressedKeys();
@@ -45,7 +64,6 @@ export class KeyboardComponent implements OnInit {
   onKeyDown (
     event: KeyboardEvent,
   ): void {
-    console.log(`KeyDOWN`, event);
     this.pressedKeysMap.set(event.code, true);
     event.preventDefault();
     this.updateListOfPressedKeys();

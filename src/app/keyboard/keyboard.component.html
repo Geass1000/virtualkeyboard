@@ -1,13 +1,17 @@
-<div appKeyEvent (keyUp)="onKeyUp($event)" (keyDown)="onKeyDown($event)"></div>
-
 <div
-  *ngFor="let keyboardLayoutElement of keyboardLayout; trackBy: trackByKey"
-  class="keyboard-layout-element"
-  [style.top.px]="getTopPositionInPix(keyboardLayoutElement)"
-  [style.left.px]="getLeftPositionInPix(keyboardLayoutElement)"
-  [style.width.px]="getWidthInPix(keyboardLayoutElement)"
-  [style.height.px]="getHeightInPix(keyboardLayoutElement)"
-  [class.active]="isActiveKeyElement(keyboardLayoutElement)"
+  appKeyEvent (keyUp)="onKeyUp($event)" (keyDown)="onKeyDown($event)"
+  appClickDelegate (dClick)="onClickKeyboardLayoutElement($event)" [tagSelector]="'.keyboard-layout-element'"
 >
-  {{keyboardLayoutElement.key}}
+  <div
+    *ngFor="let keyboardLayoutElement of keyboardLayout; trackBy: trackByKey"
+    class="keyboard-layout-element"
+    [attr.data-id]="keyboardLayoutElement.key"
+    [style.top.px]="getTopPositionInPix(keyboardLayoutElement)"
+    [style.left.px]="getLeftPositionInPix(keyboardLayoutElement)"
+    [style.width.px]="getWidthInPix(keyboardLayoutElement)"
+    [style.height.px]="getHeightInPix(keyboardLayoutElement)"
+    [class.active]="isActiveKeyElement(keyboardLayoutElement)"
+  >
+    {{keyboardLayoutElement.key}}
+  </div>
 </div>
