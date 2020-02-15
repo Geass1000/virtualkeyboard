@@ -15,3 +15,9 @@ export interface KeyboardLayoutElement {
   position: KeyboardLayoutElementPosition;
   size: KeyboardLayoutElementSize;
 }
+
+export interface ClickDelegateEvent {
+  id?: string;
+  type?: string;
+  event: MouseEvent;
+}
