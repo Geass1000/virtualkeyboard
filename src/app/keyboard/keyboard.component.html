@@ -1,6 +1,6 @@
 
 <div
-  *ngFor="let keyboardLayoutElement of keyboardLayout"
+  *ngFor="let keyboardLayoutElement of keyboardLayout; trackBy: trackByKey"
   class="keyboard-layout-element"
   [style.top.px]="getTopPositionInPix(keyboardLayoutElement)"
   [style.left.px]="getLeftPositionInPix(keyboardLayoutElement)"

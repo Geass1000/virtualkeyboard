@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as _ from 'lodash';
 
+import * as Enums from '../shared/enums';
 import * as Constants from '../shared/constants';
 import * as Interfaces from '../shared/interfaces';
 
@@ -134,5 +135,19 @@ export class KeyboardComponent implements OnInit {
       'size.height',
     );
     return sizeInPix;
+  }
+
+  /**
+   * Returns key of keyboard layout element as unique identifier.
+   *
+   * @param   {number} index
+   * @param   {Interfaces.KeyboardLayoutElement} keyboardLayoutElement
+   * @returns {Enums.KeyCode}
+   */
+  trackByKey (
+    index: number,
+    keyboardLayoutElement: Interfaces.KeyboardLayoutElement,
+  ): Enums.KeyCode {
+    return keyboardLayoutElement.key;
   }
 }
