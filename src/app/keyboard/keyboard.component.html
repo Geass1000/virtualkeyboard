@@ -1,0 +1,12 @@
+
+<div
+  *ngFor="let keyboardLayoutElement of keyboardLayout"
+  class="keyboard-layout-element"
+  [style.top.px]="getTopPositionInPix(keyboardLayoutElement)"
+  [style.left.px]="getLeftPositionInPix(keyboardLayoutElement)"
+  [style.width.px]="getWidthInPix(keyboardLayoutElement)"
+  [style.height.px]="getHeightInPix(keyboardLayoutElement)"
+  [class.active]="isActiveKeyElement(keyboardLayoutElement)"
+>
+  {{keyboardLayoutElement.key}}
+</div>
